@@ -89,10 +89,12 @@ export default function CreativeProjects() {
   };
 
   // Pagination calculation
-  const totalPages = Math.ceil(filteredImages.length / itemsPerPage);
+  const totalPages = Math.max(1, Math.ceil(filteredImages.length / itemsPerPage));
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredImages.slice(indexOfFirstItem, indexOfLastItem);
+  const placeholdersNeeded = itemsPerPage - currentItems.length;
+  const placeholders = Array.from({ length: placeholdersNeeded > 0 ? placeholdersNeeded : 0 });
 
   const scrollLeft = () => {
     setCurrentPage((p) => Math.max(p - 1, 1));
@@ -208,6 +210,32 @@ export default function CreativeProjects() {
                         {filename.toLowerCase().startsWith("esp_") 
                           ? "Custom designed Esports poster and branding assets." 
                           : "Professional graphic design and composition showcase."}
+                      </p>
+                    </div>
+                  ))}
+                  {placeholders.map((_, index) => (
+                    <div 
+                      key={`creative-placeholder-${index}`}
+                      className="retro-card reveal active" 
+                      style={{ 
+                        border: "var(--bw) dashed var(--muted)", 
+                        boxShadow: "none", 
+                        background: "rgba(0, 0, 0, 0.02)", 
+                        opacity: 0.5,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        minHeight: "330px",
+                        textAlign: "center",
+                        padding: "2rem"
+                      }}
+                    >
+                      <div style={{ fontFamily: "var(--font-display)", color: "var(--muted)", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
+                        [ SLOT {currentItems.length + index + 1} ]
+                      </div>
+                      <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem", color: "var(--muted)", fontWeight: 800 }}>
+                        FUTURE WORK HERE
                       </p>
                     </div>
                   ))}

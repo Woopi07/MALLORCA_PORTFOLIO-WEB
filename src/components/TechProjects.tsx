@@ -10,6 +10,9 @@ export default function TechProjects() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isScrolling, setIsScrolling] = useState(false);
 
+  const placeholdersNeeded = Math.max(0, 3 - images.length);
+  const placeholders = Array.from({ length: placeholdersNeeded });
+
   const handleMouseMove = (e: React.MouseEvent) => {
     // Add offset so the preview floats beautifully beside the cursor
     setMousePos({ x: e.clientX + 20, y: e.clientY + 20 });
@@ -146,6 +149,35 @@ export default function TechProjects() {
                       </div>
                       <h3>{formatTitle(filename)}</h3>
                       <p style={{ fontWeight: 500 }}>Technical software implementation showcase.</p>
+                    </div>
+                  ))}
+                  {placeholders.map((_, index) => (
+                    <div 
+                      key={`tech-placeholder-${index}`}
+                      className="retro-card reveal active" 
+                      style={{ 
+                        border: "var(--bw) dashed var(--muted)", 
+                        boxShadow: "none", 
+                        background: "rgba(255, 255, 255, 0.05)", 
+                        opacity: 0.5,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "330px",
+                        width: "320px",
+                        flexShrink: 0,
+                        textAlign: "center",
+                        padding: "2rem",
+                        color: "var(--fg)"
+                      }}
+                    >
+                      <div style={{ fontFamily: "var(--font-display)", color: "var(--muted)", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
+                        [ SLOT {images.length + index + 1} ]
+                      </div>
+                      <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem", color: "var(--muted)", fontWeight: 800 }}>
+                        FUTURE ENGINE HERE
+                      </p>
                     </div>
                   ))}
                 </div>
