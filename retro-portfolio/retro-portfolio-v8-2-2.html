@@ -1,0 +1,1009 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playful Retro Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;600;800&family=JetBrains+Mono&family=Gochi+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: oklch(55% 0.12 250);
+            --surface: oklch(98% 0.01 250);
+            --fg: oklch(15% 0.01 250);
+            --muted: oklch(45% 0.05 250);
+            --border: oklch(15% 0.01 250);
+            --accent: oklch(85% 0.18 90);
+            --accent-alt: oklch(65% 0.22 25);
+            --locker-green: oklch(45% 0.15 150);
+            
+            --wood: #8b5a2b;
+            --cork: #d2b48c;
+            --pin-red: #ff4d4d;
+            --note-yellow: #fff9c4;
+            --sticker-blue: #2b5797;
+            --paper-cream: #fffde7;
+            
+            --font-display: 'Bungee', cursive;
+            --font-body: 'Poppins', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-hand: 'Gochi Hand', cursive;
+            
+            --bw: 4px; /* Border Width */
+            --shadow-offset: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg);
+            color: var(--fg);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Utility Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .retro-card {
+            background: var(--surface);
+            border: var(--bw) solid var(--border);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border);
+            padding: 2.5rem;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .retro-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            border: var(--bw) solid var(--border);
+            box-shadow: 6px 6px 0px var(--border);
+            font-family: var(--font-display);
+            text-decoration: none;
+            color: var(--fg);
+            cursor: pointer;
+            transition: all 0.1s;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            border-radius: 99px;
+        }
+
+        .retro-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px var(--border);
+        }
+
+        .retro-button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--border);
+        }
+
+        /* Navigation - Corkboard Redesign */
+        nav {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: calc(100% - 2rem);
+            max-width: 1200px;
+        }
+
+        .nav-inner {
+            background-color: var(--cork);
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(0,0,0,0.1) 1px, transparent 0);
+            background-size: 6px 6px;
+            border: 10px solid var(--wood);
+            box-shadow: 
+                inset 0 0 15px rgba(0,0,0,0.2),
+                0 10px 30px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        /* Push pins in corners */
+        .nav-inner::before, .nav-inner::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle at 30% 30%, var(--pin-red), #900);
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        .nav-inner::before { top: -5px; left: -5px; }
+        .nav-inner::after { top: -5px; right: -5px; }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--sticker-blue);
+            background: white;
+            padding: 0.4rem 1.2rem;
+            border: 3px solid var(--border);
+            transform: rotate(-3deg);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.15);
+            line-height: 1.1;
+            text-align: center;
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--fg);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            padding: 0.5rem 0.8rem;
+            background: var(--note-yellow);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            display: inline-block;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .nav-links li:nth-child(odd) a { transform: rotate(2deg); }
+        .nav-links li:nth-child(even) a { transform: rotate(-2deg); }
+
+        .nav-links a:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Hero */
+        #hero {
+            background: 
+                linear-gradient(rgba(0,0,0,0.02), rgba(0,0,0,0.02)),
+                url('mpmgpwy4-HERO_PAGE.png') no-repeat center center;
+            background-size: cover;
+            background-color: var(--locker-green);
+            text-align: center;
+            overflow: hidden;
+            display: block;
+            padding-top: 12rem;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .hero-content > * {
+            pointer-events: auto;
+        }
+
+        /* Playful Elements */
+        .sticker {
+            position: absolute;
+            background: white;
+            border: var(--bw) solid var(--border);
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-display);
+            z-index: 5;
+            box-shadow: 4px 4px 0px var(--border);
+            user-select: none;
+            font-size: 1.2rem;
+        }
+
+        .sticker.red { background: var(--accent-alt); color: white; }
+        .sticker.yellow { background: var(--accent); color: var(--fg); }
+
+        .star {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-alt);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            position: absolute;
+            border: 3px solid var(--border);
+            z-index: 4;
+        }
+
+        .pin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, var(--pin-red), #900);
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .doodle {
+            position: absolute;
+            opacity: 0.2;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* About Section / Scrapbook Styles */
+        #about {
+            background-color: var(--bg);
+            background-image: radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            overflow: hidden;
+        }
+
+        .scrapbook-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .scrapbook-left {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame {
+            background: white;
+            padding: 1rem;
+            padding-bottom: 4rem;
+            border: var(--bw) solid var(--border);
+            box-shadow: 15px 15px 0px var(--border);
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: float-photo 6s ease-in-out infinite alternate;
+            max-width: 400px;
+        }
+
+        @keyframes float-photo {
+            from { transform: translateY(0px) rotate(-2deg); }
+            to { transform: translateY(-15px) rotate(1deg); }
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            box-shadow: 25px 25px 50px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        /* Layered paper effect behind photo */
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            background: var(--note-yellow);
+            border: 2px solid var(--border);
+            transform: rotate(3deg);
+            z-index: -1;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+        }
+
+        .scrapbook-img {
+            width: 100%;
+            height: auto;
+            border: 2px solid var(--border);
+            display: block;
+            image-rendering: high-quality;
+        }
+
+        .tape {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(0,0,0,0.1);
+            z-index: 3;
+        }
+
+        .tape-tl { top: -20px; left: -30px; transform: rotate(-35deg); }
+        .tape-tr { top: -10px; right: -40px; transform: rotate(45deg); }
+        .tape-br { bottom: 20px; right: -30px; transform: rotate(-15deg); }
+
+        .paper-note {
+            background: var(--accent);
+            padding: 2rem;
+            border: var(--bw) solid var(--border);
+            box-shadow: 8px 8px 0px var(--border);
+            position: absolute;
+            bottom: -40px;
+            left: -60px;
+            max-width: 250px;
+            transform: rotate(-5deg);
+            z-index: 4;
+        }
+
+        .paper-note p {
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .scrapbook-right {
+            position: relative;
+        }
+
+        .intro-card {
+            background: var(--surface);
+            padding: 3rem;
+            border: var(--bw) solid var(--border);
+            box-shadow: 12px 12px 0px var(--accent-alt);
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-card h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-alt);
+            line-height: 1;
+        }
+
+        .intro-card p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) rotate(var(--rot, 0deg));
+        }
+
+        /* Section Specifics */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            -webkit-text-stroke: 2px var(--border);
+            color: var(--accent);
+            text-shadow: 6px 6px 0px var(--border);
+        }
+
+        #creative { background-color: var(--surface); }
+        #tech { background-color: var(--bg); color: white; }
+        #experience { background-color: var(--accent); }
+        #contact { background-color: var(--accent-alt); color: white; }
+
+        .project-card h3 {
+            font-family: var(--font-display);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--accent-alt);
+        }
+
+        /* Footer / Contact */
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: var(--bw) solid var(--border);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--fg);
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Floating Portfolio Widget */
+        .portfolio-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 100px;
+            cursor: pointer;
+            z-index: 2000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        .portfolio-widget img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .portfolio-widget:hover {
+            transform: scale(1.15) rotate(8deg);
+            filter: drop-shadow(0 0 20px var(--accent)) drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+        }
+
+        /* CV Modal */
+        .cv-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cv-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cv-panel {
+            background-color: var(--cork);
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(0,0,0,0.15) 1px, transparent 0);
+            background-size: 8px 8px;
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            border: 15px solid var(--wood);
+            box-shadow: 
+                inset 0 0 30px rgba(0,0,0,0.3),
+                0 30px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.9);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .cv-modal.active .cv-panel {
+            transform: scale(1);
+        }
+
+        .cv-header {
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .cv-header-title {
+            background: white;
+            padding: 0.5rem 1.5rem;
+            border: 3px solid var(--border);
+            transform: rotate(-2deg);
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cv-header-title span {
+            font-family: var(--font-display);
+            color: var(--sticker-blue);
+            font-size: 1.5rem;
+        }
+
+        .cv-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .control-btn {
+            background: var(--note-yellow);
+            border: 2px solid var(--border);
+            color: var(--fg);
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 3px 3px 0px var(--border);
+            transition: all 0.1s;
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .control-btn.close {
+            background: var(--pin-red);
+            color: white;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            margin-left: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .cv-viewport {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .cv-viewer-content {
+            position: absolute;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
+            padding: 2rem;
+            background: var(--paper-cream);
+            border: 2px solid #ddd;
+            box-shadow: 
+                5px 5px 0px #fff,
+                10px 10px 0px #eee,
+                15px 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .cv-viewer-content img {
+            display: block;
+            width: 100%;
+            height: auto;
+            image-rendering: high-quality;
+        }
+
+        /* Decorative Elements in Modal */
+        .modal-polaroid {
+            position: absolute;
+            top: 15%;
+            left: 5%;
+            background: white;
+            padding: 0.75rem;
+            padding-bottom: 3rem;
+            width: 180px;
+            border: 1px solid #ddd;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.2);
+            transform: rotate(-10deg);
+            z-index: 5;
+            pointer-events: none;
+            animation: float-polaroid 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes float-polaroid {
+            from { transform: rotate(-10deg) translateY(0px); }
+            to { transform: rotate(-8deg) translateY(-15px); }
+        }
+
+        .modal-polaroid .pic {
+            background: #eee;
+            width: 100%;
+            aspect-ratio: 1;
+            border: 1px solid #ccc;
+        }
+
+        .modal-note {
+            position: absolute;
+            bottom: 15%;
+            right: 5%;
+            background: var(--note-yellow);
+            padding: 1.5rem;
+            width: 200px;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.15);
+            transform: rotate(5deg);
+            z-index: 5;
+            font-family: var(--font-hand);
+            font-size: 1.2rem;
+            pointer-events: none;
+            animation: float-note 5s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes float-note {
+            from { transform: rotate(5deg) translateY(0px); }
+            to { transform: rotate(7deg) translateY(-10px); }
+        }
+
+        .modal-note::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: radial-gradient(circle at 30% 30%, var(--pin-red), #900);
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cv-footer {
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            background: rgba(0,0,0,0.05);
+            border-top: 2px solid rgba(0,0,0,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .scrapbook-container { grid-template-columns: 1fr; gap: 6rem; }
+            .scrapbook-left { order: 1; }
+            .scrapbook-right { order: 2; }
+            .cv-header-title { display: none; }
+            .modal-polaroid, .modal-note { display: none; }
+            .paper-note { left: -20px; bottom: -60px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">MJ'S PORTFOLIO</div>
+            <ul class="nav-links">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#creative">Creative Projects</a></li>
+                <li><a href="#tech">Tech Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="hero-content"></div>
+
+        <div class="star" style="top: 25%; left: 15%; transform: rotate(-15deg); scale: 0.8;"></div>
+        <div class="star" style="bottom: 20%; right: 12%; transform: rotate(20deg); background: var(--accent); scale: 1.2;"></div>
+        
+        <svg class="doodle" style="top: 10%; right: 20%;" width="100" height="100" viewBox="0 0 100 100">
+            <path d="M10,50 Q30,10 50,50 T90,50" fill="none" stroke="black" stroke-width="5" />
+        </svg>
+        <svg class="doodle" style="bottom: 10%; left: 15%;" width="120" height="120" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="black" stroke-width="4" stroke-dasharray="10 5" />
+        </svg>
+    </section>
+
+    <!-- Floating Widget -->
+    <div class="portfolio-widget" id="cv-trigger">
+        <img src="mpmi7705-image.png" alt="MJ's Portfolio">
+    </div>
+
+    <!-- CV Modal -->
+    <div class="cv-modal" id="cv-modal">
+        <div class="cv-panel">
+            <div class="modal-polaroid">
+                <div class="pic"></div>
+                <p style="font-family: var(--font-hand); text-align: center; margin-top: 0.5rem;">MJ (2026)</p>
+            </div>
+            <div class="modal-note">
+                <p>Check out my journey and skills!</p>
+            </div>
+
+            <div class="cv-header">
+                <div class="cv-header-title">
+                    <span>RESUME_VIEWER</span>
+                </div>
+                <div class="cv-controls">
+                    <button class="control-btn" id="zoom-out" title="Zoom Out">-</button>
+                    <button class="control-btn" id="zoom-fit" title="Fit to Screen">[]</button>
+                    <button class="control-btn" id="zoom-in" title="Zoom In">+</button>
+                    <button class="control-btn close" id="close-cv" title="Close">X</button>
+                </div>
+            </div>
+
+            <div class="cv-viewport" id="cv-viewport">
+                <div class="cv-viewer-content" id="cv-viewer-content">
+                    <img id="cv-img" src="" alt="CV Preview" style="display: none;">
+                    <div id="cv-empty" style="text-align: center; font-family: var(--font-hand); font-size: 2rem;">
+                        <p>Your CV will appear here!</p>
+                        <p style="font-size: 1rem; opacity: 0.6;">(Click upload below)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-footer">
+                <div id="zoom-level" style="font-family: var(--font-mono); font-weight: 800; font-size: 0.8rem;">ZOOM: 100%</div>
+                <div>
+                    <label for="cv-upload" style="background: var(--accent); padding: 0.5rem 1.5rem; border: 3px solid var(--border); font-family: var(--font-display); font-size: 0.9rem; cursor: pointer; box-shadow: 5px 5px 0px var(--border);">Replace CV File</label>
+                    <input type="file" id="cv-upload" style="display: none;" accept=".pdf,image/*">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="container scrapbook-container">
+            <div class="scrapbook-left reveal" style="--rot: -2deg;">
+                <!-- Decorative Push Pin -->
+                <div class="pin" style="top: -15px; left: 50%; transform: translateX(-50%);"></div>
+                
+                <div class="tape tape-tl"></div>
+                <div class="tape tape-tr"></div>
+                
+                <div class="photo-frame">
+                    <img src="mpml5rjz-8a0e48cf-9bff-48fa-a6aa-e36bf6b18e59.jpg" alt="MJ" class="scrapbook-img">
+                    <p style="font-family: var(--font-hand); text-align: center; margin-top: 1.5rem; font-size: 1.4rem; color: var(--sticker-blue);">Designer at work! 🎨</p>
+                    <div class="sticker yellow" style="bottom: 10px; right: -30px; transform: rotate(15deg);">THAT'S ME!</div>
+                </div>
+
+                <div class="paper-note reveal" style="--rot: -5deg;">
+                    <p>// STATUS: CREATING ART<br>// LOCATION: THE INTERNET<br>// MOOD: INSPIRED</p>
+                    <div class="pin" style="top: -10px; right: 10px; scale: 0.7;"></div>
+                </div>
+
+                <!-- Floating Star Decoration -->
+                <div class="star" style="top: -60px; right: 0; background: white; scale: 0.8; opacity: 0.6;"></div>
+            </div>
+
+            <div class="scrapbook-right">
+                <div class="intro-card reveal">
+                    <h2 style="font-size: clamp(3rem, 8vw, 5rem); letter-spacing: -2px; margin-bottom: 2rem;">HEY, <br> I'M MJ!</h2>
+                    <p>I’m a 21-year-old <strong>Graphic Designer</strong>, <strong>UI/UX Developer</strong>, and <strong>Project Manager</strong> passionate about crafting playful digital experiences that feel both creative and functional.</p>
+                    <p>Currently studying at <strong>Pamantasan ng Lungsod ng Valenzuela</strong>, I’m constantly exploring new ideas, improving my skills, and pushing my creativity beyond limits.</p>
+                    
+                    <div style="margin-top: 2.5rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+                        <a href="#contact" class="retro-button">Let's Connect!</a>
+                        <div class="sticker red" style="position: static; transform: rotate(5deg); font-size: 0.9rem; padding: 0.5rem 1.2rem;">HIRE ME!</div>
+                    </div>
+
+                    <!-- Decorative elements inside card -->
+                    <div class="tape tape-br"></div>
+                    <div class="star" style="position: absolute; top: -20px; right: -20px; background: var(--accent); scale: 0.7;"></div>
+                </div>
+                
+                <!-- Hand-drawn Doodle Arrow -->
+                <svg class="doodle" style="top: -40px; left: -20px; transform: rotate(-30deg);" width="100" height="100" viewBox="0 0 100 100">
+                    <path d="M20,80 Q50,20 80,40 M80,40 L70,30 M80,40 L70,50" fill="none" stroke="var(--accent-alt)" stroke-width="3" stroke-linecap="round" />
+                </svg>
+
+                <!-- Additional Stickers around the card -->
+                <div class="sticker yellow" style="bottom: -20px; right: 20px; transform: rotate(-8deg); font-size: 0.8rem;">2026 EDITION</div>
+                <div class="star" style="top: 40%; right: -50px; background: white; scale: 0.5;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="creative">
+        <div class="container">
+            <h2 class="section-title">Creative Projects</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+                <div class="retro-card project-card reveal">
+                    <div style="background: #eee; height: 200px; border: var(--bw) solid var(--border); margin-bottom: 1.5rem; display: grid; place-items: center;">
+                        <span style="font-family: var(--font-display); opacity: 0.3;">[WORK PREVIEW]</span>
+                    </div>
+                    <h3>Retro Brand Identity</h3>
+                    <p style="font-weight: 500;">A complete visual overhaul for a modern music label with 80s roots.</p>
+                </div>
+                <div class="retro-card project-card reveal">
+                    <div style="background: #eee; height: 200px; border: var(--bw) solid var(--border); margin-bottom: 1.5rem; display: grid; place-items: center;">
+                        <span style="font-family: var(--font-display); opacity: 0.3;">[WORK PREVIEW]</span>
+                    </div>
+                    <h3>Festival Campaign</h3>
+                    <p style="font-weight: 500;">Posters, social assets, and motion graphics for "Summer Vibes '24".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent); text-shadow: 6px 6px 0px white;">Tech Projects</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+                <div class="retro-card project-card reveal" style="color: var(--fg);">
+                    <div style="background: #333; height: 200px; border: var(--bw) solid var(--border); margin-bottom: 1.5rem; display: grid; place-items: center;">
+                        <span style="font-family: var(--font-display); color: white;">[DASHBOARD MOCK]</span>
+                    </div>
+                    <h3>AI Analytics Platform</h3>
+                    <p style="font-weight: 500;">Custom React dashboard with real-time data visualization using D3.js.</p>
+                </div>
+                <div class="retro-card project-card reveal" style="color: var(--fg);">
+                    <div style="background: #333; height: 200px; border: var(--bw) solid var(--border); margin-bottom: 1.5rem; display: grid; place-items: center;">
+                        <span style="font-family: var(--font-display); color: white;">[CLI TOOL]</span>
+                    </div>
+                    <h3>DevOps Automation</h3>
+                    <p style="font-weight: 500;">High-performance Go binary for managing container clusters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">My Journey</h2>
+            <div class="retro-card reveal" style="max-width: 900px; margin: 0 auto; padding: 4rem;">
+                <div style="display: flex; flex-direction: column; gap: 3rem;">
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="background: var(--accent-alt); padding: 0.5rem 1rem; border: var(--bw) solid var(--border); font-family: var(--font-mono); font-weight: 800; font-size: 0.8rem; transform: rotate(-3deg);">CURRENT</div>
+                        <div>
+                            <h3 style="font-family: var(--font-display); margin-bottom: 0.5rem;">Student @ Pamantasan ng Lungsod ng Valenzuela</h3>
+                            <p style="font-weight: 600;">Developing expertise in Project Management and Design Theory while building functional digital products.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                        <div style="background: var(--accent); padding: 0.5rem 1rem; border: var(--bw) solid var(--border); font-family: var(--font-mono); font-weight: 800; font-size: 0.8rem; transform: rotate(2deg);">FREELANCE</div>
+                        <div>
+                            <h3 style="font-family: var(--font-display); margin-bottom: 0.5rem;">Graphic Designer & UI Developer</h3>
+                            <p style="font-weight: 600;">Collaborating with small brands to create impactful visual identities and intuitive user interfaces.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Extra doodle in experience -->
+                <div class="sticker yellow" style="bottom: -15px; left: 20px; transform: rotate(5deg); font-size: 0.7rem;">DREAM BIG!</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white; text-align: center;">Say Hello!</h2>
+            <div class="retro-card contact-form reveal" style="max-width: 600px; margin: 0 auto; color: var(--fg);">
+                <form>
+                    <label style="display: block; font-weight: 800; margin-bottom: 0.5rem; font-family: var(--font-mono);">NAME.TXT</label>
+                    <input type="text" placeholder="Who are you?">
+                    <label style="display: block; font-weight: 800; margin-bottom: 0.5rem; font-family: var(--font-mono);">EMAIL.COM</label>
+                    <input type="email" placeholder="Where can I reach you?">
+                    <label style="display: block; font-weight: 800; margin-bottom: 0.5rem; font-family: var(--font-mono);">MESSAGE.DOC</label>
+                    <textarea placeholder="Tell me about your project..."></textarea>
+                    <button class="retro-button" type="button" style="width: 100%;">send message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // --- SCROLL REVEAL ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- CV MODAL ENGINE ---
+        const modal = document.getElementById('cv-modal');
+        const trigger = document.getElementById('cv-trigger');
+        const closeBtn = document.getElementById('close-cv');
+        const viewport = document.getElementById('cv-viewport');
+        const content = document.getElementById('cv-viewer-content');
+        const img = document.getElementById('cv-img');
+        const empty = document.getElementById('cv-empty');
+        const upload = document.getElementById('cv-upload');
+        const zoomLevelText = document.getElementById('zoom-level');
+
+        let scale = 1;
+        let x = 0;
+        let y = 0;
+        let isDragging = false;
+        let startX, startY;
+
+        const updateTransform = () => {
+            content.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+            zoomLevelText.textContent = `ZOOM: ${Math.round(scale * 100)}%`;
+        };
+
+        const resetView = () => {
+            scale = 1; x = 0; y = 0;
+            updateTransform();
+        };
+
+        trigger.addEventListener('click', () => {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            resetView();
+        });
+
+        const closeModal = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+        const zoom = (delta, isWheel = false, mouseX, mouseY) => {
+            const zoomSpeed = isWheel ? 0.001 : 0.2;
+            const newScale = Math.min(Math.max(scale + (delta * -zoomSpeed), 0.2), 5);
+            
+            if (isWheel && mouseX !== undefined && mouseY !== undefined) {
+                const rect = viewport.getBoundingClientRect();
+                const offsetX = mouseX - rect.left - rect.width/2;
+                const offsetY = mouseY - rect.top - rect.height/2;
+                x -= (offsetX - x) * (newScale / scale - 1);
+                y -= (offsetY - y) * (newScale / scale - 1);
+            }
+            scale = newScale;
+            updateTransform();
+        };
+
+        viewport.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            zoom(e.deltaY, true, e.clientX, e.clientY);
+        }, { passive: false });
+
+        document.getElementById('zoom-in').addEventListener('click', () => zoom(-1));
+        document.getElementById('zoom-out').addEventListener('click', () => zoom(1));
+        document.getElementById('zoom-fit').addEventListener('click', resetView);
+
+        viewport.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - x;
+            startY = e.clientY - y;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            x = e.clientX - startX;
+            y = e.clientY - startY;
+            updateTransform();
+        });
+
+        window.addEventListener('mouseup', () => isDragging = false);
+
+        upload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                img.src = event.target.result;
+                img.style.display = 'block';
+                empty.style.display = 'none';
+                resetView();
+            };
+            reader.readAsDataURL(file);
+        });
+    </script>
+</body>
+</html>
