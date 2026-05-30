@@ -35,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${bungee.variable} ${poppins.variable} ${jetbrainsMono.variable} ${gochiHand.variable}`}
+      suppressHydrationWarning
     >
       <body>{children}</body>
     </html>

@@ -1,47 +1,60 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React, { useState, useCallback } from "react";
 
 export default function Contact() {
+  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formState.name || !formState.email || !formState.message) {
+      alert("Please fill out all fields! 📝");
+      return;
+    }
+    alert(`Thank you, ${formState.name}! Your message has been sent successfully. 🚀`);
+    setFormState({ name: "", email: "", message: "" });
+  }, [formState]);
+
   return (
-    <section id="contact" className="py-32 min-h-screen flex items-center" style={{ backgroundColor: "oklch(65% 0.22 25)" }}>
+    <section id="contact">
       <div className="container">
-        <h2 className="section-title text-white text-center">Say Hello!</h2>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.8, ease: [0.17, 0.67, 0.83, 0.67] }}
-          className="retro-card max-w-[600px] mx-auto"
-          style={{ color: "oklch(15% 0.01 250)" }}
-        >
-          <form onSubmit={(e) => e.preventDefault()}>
-            <label className="block font-extrabold mb-2 font-mono text-sm">NAME.TXT</label>
-            <input
-              type="text"
+        <h2 className="section-title" style={{ color: "white", textAlign: "center" }}>Say Hello!</h2>
+        <div className="retro-card contact-form reveal" style={{ maxWidth: "600px", margin: "0 auto", color: "var(--fg)" }}>
+          <form onSubmit={handleSubmit}>
+            <label style={{ display: "block", fontWeight: 800, marginBottom: "0.5rem", fontFamily: "var(--font-mono)" }}>
+              NAME.TXT
+            </label>
+            <input 
+              type="text" 
               placeholder="Who are you?"
-              className="w-full p-4 border-[4px] border-[oklch(15%_0.01_250)] mb-6 font-body font-semibold rounded-[8px] bg-[oklch(98%_0.01_250)] text-[oklch(15%_0.01_250)] focus:outline-none focus:border-[oklch(85%_0.18_90)]"
+              value={formState.name}
+              onChange={(e) => setFormState({ ...formState, name: e.target.value })}
             />
-            <label className="block font-extrabold mb-2 font-mono text-sm">EMAIL.COM</label>
-            <input
-              type="email"
+            
+            <label style={{ display: "block", fontWeight: 800, marginBottom: "0.5rem", fontFamily: "var(--font-mono)" }}>
+              EMAIL.COM
+            </label>
+            <input 
+              type="email" 
               placeholder="Where can I reach you?"
-              className="w-full p-4 border-[4px] border-[oklch(15%_0.01_250)] mb-6 font-body font-semibold rounded-[8px] bg-[oklch(98%_0.01_250)] text-[oklch(15%_0.01_250)] focus:outline-none focus:border-[oklch(85%_0.18_90)]"
+              value={formState.email}
+              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
             />
-            <label className="block font-extrabold mb-2 font-mono text-sm">MESSAGE.DOC</label>
-            <textarea
+            
+            <label style={{ display: "block", fontWeight: 800, marginBottom: "0.5rem", fontFamily: "var(--font-mono)" }}>
+              MESSAGE.DOC
+            </label>
+            <textarea 
               placeholder="Tell me about your project..."
-              className="w-full p-4 border-[4px] border-[oklch(15%_0.01_250)] mb-6 font-body font-semibold rounded-[8px] bg-[oklch(98%_0.01_250)] text-[oklch(15%_0.01_250)] focus:outline-none focus:border-[oklch(85%_0.18_90)]"
-              rows={4}
-            />
-            <button
-              type="button"
-              className="w-full inline-block px-8 py-4 bg-[oklch(85%_0.18_90)] border-[4px] border-[oklch(15%_0.01_250)] shadow-[6px_6px_0_oklch(15%_0.01_250)] font-display no-underline text-[oklch(15%_0.01_250)] cursor-pointer transition-all duration-100 uppercase text-base rounded-[99px] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_oklch(15%_0.01_250)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_oklch(15%_0.01_250)]"
-            >
+              value={formState.message}
+              onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+            ></textarea>
+            
+            <button className="retro-button" type="submit" style={{ width: "100%" }}>
               send message
             </button>
           </form>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
