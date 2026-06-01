@@ -688,4 +688,141 @@ section {
     .paper-note { left: -20px; bottom: -60px; }
 }
 
+/* Journey Redesign Styles */
+.journey-board {
+    position: relative;
+    background-color: var(--cork);
+    background-image: 
+        radial-gradient(circle at 2px 2px, rgba(0,0,0,0.12) 1px, transparent 0);
+    background-size: 8px 8px;
+    border: 12px solid var(--wood);
+    border-radius: 6px;
+    box-shadow: 
+        inset 0 0 20px rgba(0,0,0,0.25),
+        0 15px 35px rgba(0,0,0,0.3);
+    padding: 4rem 2rem;
+    overflow: hidden;
+}
+
+.journey-board::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.journey-item {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+    z-index: 10;
+}
+
+.journey-item:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+    z-index: 20;
+}
+
+/* Polaroid item */
+.journey-polaroid {
+    background: white;
+    padding: 1.25rem;
+    padding-bottom: 3.5rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 8px 12px 20px rgba(0,0,0,0.25);
+    transform: rotate(var(--rot, -3deg));
+}
+
+.journey-polaroid .polaroid-media {
+    background: #f0f0f0;
+    width: 100%;
+    aspect-ratio: 1.2;
+    border: 1px solid rgba(0,0,0,0.05);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Torn lined notebook paper */
+.journey-lined-paper {
+    background-color: var(--paper-cream);
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 100% 24px;
+    line-height: 24px;
+    padding: 2rem 2rem 2rem 3.5rem;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 10px 14px 24px rgba(0,0,0,0.22);
+    transform: rotate(var(--rot, 2deg));
+    position: relative;
+}
+
+.journey-lined-paper::before {
+    content: '';
+    position: absolute;
+    left: 2.2rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+/* Notebook paper torn edge look */
+.journey-lined-paper-torn {
+    clip-path: polygon(
+        0% 2%, 3% 0%, 7% 3%, 11% 0%, 15% 2%, 20% 0%, 24% 3%, 28% 1%, 32% 3%, 37% 0%, 41% 2%, 45% 0%, 49% 3%, 54% 1%, 58% 3%, 62% 0%, 66% 2%, 71% 0%, 75% 3%, 79% 1%, 83% 3%, 88% 0%, 92% 2%, 96% 0%, 100% 2%,
+        100% 98%, 97% 100%, 93% 97%, 89% 100%, 85% 98%, 81% 100%, 76% 97%, 72% 100%, 68% 98%, 64% 100%, 59% 97%, 55% 100%, 51% 98%, 47% 100%, 42% 97%, 38% 100%, 34% 98%, 30% 100%, 25% 97%, 21% 100%, 17% 98%, 13% 100%, 9% 97%, 4% 100%, 0% 98%
+    );
+}
+
+/* Sticky note */
+.journey-sticky {
+    background: var(--note-yellow);
+    padding: 2rem;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 6px 10px 18px rgba(0,0,0,0.2);
+    transform: rotate(var(--rot, 4deg));
+}
+
+/* Paperclip */
+.paperclip {
+    position: absolute;
+    top: -22px;
+    left: 45px;
+    width: 28px;
+    height: 55px;
+    border: 3px solid #999;
+    border-radius: 12px;
+    background: transparent;
+    z-index: 15;
+    transform: rotate(-25deg);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+}
+
+.paperclip::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    width: 14px;
+    height: 38px;
+    border: 3px solid #999;
+    border-radius: 8px;
+}
+
+/* Pushpin hover wiggle */
+@keyframes wiggle-pin {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+    33% { transform: translate(-50%, -50%) rotate(-8deg); }
+    66% { transform: translate(-50%, -50%) rotate(8deg); }
+}
+
+.journey-item:hover .pin {
+    animation: wiggle-pin 0.4s ease-in-out infinite alternate;
+}
+
+
 
