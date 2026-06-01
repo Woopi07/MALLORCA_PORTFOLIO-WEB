@@ -2,10 +2,17 @@
 
 import React from "react";
 
-export default function PortfolioWidget({ onClick }: { onClick: () => void }) {
+export default function PortfolioWidget() {
   return (
-    <div className="portfolio-widget" id="cv-trigger" onClick={onClick}>
+    <a 
+      className="portfolio-widget" 
+      id="cv-trigger" 
+      href="/cv.pdf" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      style={{ display: "block" }}
+    >
       <img src="/assets/prototype-images/mpmi7705-image.png" alt="MJ&apos;s Portfolio" />
-    </div>
+    </a>
   );
 }
