@@ -202,7 +202,7 @@ section {
 #hero {
     background: 
         linear-gradient(rgba(0,0,0,0.02), rgba(0,0,0,0.02)),
-        url('/assets/prototype-images/mpmgpwy4-HERO_PAGE.png') no-repeat center center;
+        url('/assets/prototype/mpmgpwy4-HERO_PAGE.png') no-repeat center center;
     background-size: cover;
     background-color: var(--locker-green);
     text-align: center;

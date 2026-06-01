@@ -15,7 +15,7 @@ export default function About() {
           
           <div className="photo-frame">
             <img 
-              src="/assets/prototype-images/mpml5rjz-8a0e48cf-9bff-48fa-a6aa-e36bf6b18e59.jpg" 
+              src="/assets/prototype/mpml5rjz-8a0e48cf-9bff-48fa-a6aa-e36bf6b18e59.jpg" 
               alt="MJ" 
               className="scrapbook-img"
             />

@@ -3,21 +3,11 @@ import fs from "fs";
 import path from "path";
 
 export async function GET() {
+  const galleryDir = path.join(process.cwd(), "public", "gallery", "Tech Projects");
   try {
-    const techDir = path.join(process.cwd(), "public", "gallery", "Tech Projects");
-    if (!fs.existsSync(techDir)) {
-      return NextResponse.json([]);
-    }
-    const files = fs.readdirSync(techDir);
-    // Filter for common image extensions
-    const imageExtensions = [".png", ".jpg", ".jpeg", ".webp", ".gif"];
-    const images = files.filter((file) => {
-      const ext = path.extname(file).toLowerCase();
-      return imageExtensions.includes(ext);
-    });
-    return NextResponse.json(images);
-  } catch (error) {
-    console.error("Error reading tech projects directory:", error);
+    const files = fs.readdirSync(galleryDir).filter((f) => /\.(png|jpg|jpeg|webp)$/i.test(f));
+    return NextResponse.json(files);
+  } catch {
     return NextResponse.json([]);
   }
 }

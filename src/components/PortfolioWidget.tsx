@@ -12,7 +12,7 @@ export default function PortfolioWidget() {
       rel="noopener noreferrer"
       style={{ display: "block" }}
     >
-      <img src="/assets/prototype-images/mpmi7705-image.png" alt="MJ&apos;s Portfolio" />
+      <img src="/assets/prototype/mpmi7705-image.png" alt="MJ&apos;s Portfolio" />
     </a>
   );
 }
